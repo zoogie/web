@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>34⅕c3</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal" style="font-size:28px;">
+			<div class="slides">
+				<section><h1 style="color:#A0A0FF;text-shadow:none;">34⅕c3 : EOL is LOL</h1>
+				<p>Presentation by Zoogie</p>
+				</section>
+				<section data-transition="fade-out">
+				<h3 style="color:yellow;">What's this about?</h3>
+					<p class="fragment">The movable.sed!</p>
+					<p class="fragment"><img src="img/butwhy.jpg"></p>
+					<div class="fragment">Because the movable.sed has such great security characteristics!</div>
+				</section>			
+				<section data-transition="zoom" style="transition-duration:1500ms;">
+					<a href="https://www.youtube.com/watch?v=r5g_gs6nnyo"><img src="img/formetopoopon.jpg"></a>
+					</br><font class="fragment" size="1" color="grey">for me to poop on</font>
+				</section>
+				<section data-transition="fade-out">
+				 <h3 style="color:yellow;">What's ...movable.sed?</h3>
+					<ul>
+					<li><a href="https://3dbrew.org/wiki/Nand/private/movable.sed">3dbrew</a></li>
+					<li>In short, it's a file that contains a 128 bit key that's responsible for encrypting everything on the sd card: games, saves, ...dsiware exports</li>
+					<li>It's console-unique and stored in the nand until system transfer</li>
+					<li class="fragment">Its purpose is to be make it possible to transfer the contents of one 3ds to another without having to redownload/re-encrypt the entire contents of the sd card - hence the "movable" part of its name</li>
+				  </ul>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">What can we do with that key/movable.sed?</h3>
+				  <li class="fragment">Take it away, yls8 ...<a href="https://www.3dbrew.org/wiki/3DS_System_Flaws"><img src="img/yellows8.png"/></a></li>
+				  <ul>
+					<li class="fragment">In other words, you can modify game saves, extdata, themes, etc.</li>
+					<li class="fragment">Basically everything on the sd card is fair game</li><br>
+					<li class="fragment">But I'm sure all you really want to do is modify DSiWare exports</li>
+					<li class="fragment"><a href="https://3ds.guide/installing-boot9strap-(dsiware).html">DSiWare Transfer method</a> on a single system sure sounds nice ...</li>
+				  </ul>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Sounds good, how do we get it?</h3>
+				  <ul>
+					<li class="fragment">Conventionally, you can get it with a system transfer. Just dump it before the transfer begins and it will be the same on the receiving system</li>
+					<li class="fragment">But that requires a second - and hacked - 3ds :/</li>
+					<li class="fragment">You can also import/export one with arm11 kernel access, but there are no (current firm) k11 sploits public right now, so we have no choice other than to ...</li>
+					<li class="fragment">... forge ahead dauntlessly! <a href="http://sydlexia.com/nesquotes9.htm"><img style="border: none;background:transparent; margin:auto; box-shadow:none;" src="img/ahead.png"></a></li>
+				  </ul>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Anatomy of a movable.sed key Y</h3>
+				  <img src="img/msed.png">
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Anatomy of a movable.sed key Y</h3>
+				  <img src="img/msed2.png">
+				</section>
+				<section>
+				  <h3 style="color:yellow;">That Local Friend Code Seed (LFCS) sounds familiar...</h3>
+				  <p class="fragment">It is.<p/>
+				  <p class="fragment">And it can be dumped from userland!<p/>
+				  <p class="fragment"><font size="2"><i>and maybe other places ...</i></font><p/>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Great! Now we can brute-force the last u64!!</h3>
+				  <p class="fragment">- Lol, hell no -</p>
+				  <p class="fragment">Even with a GPU-accelerated monster machine that can crunch billions of sha256s a second, it would take decades to crack a u64</p>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Oh. So the presentation is over I guess..</h3>
+				  <p class="fragment">( ͡° ͜ʖ ͡°)</p>
+				  <p class="fragment">Where there's a will, there's a Lenny.</p>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Anatomy of a movable.sed key Y</h3>
+				  <img src="img/msed2.png">
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Anatomy of a movable.sed key Y</h3>
+				  <img src="img/msed3.png">
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Anatomy of a movable.sed key Y</h3>
+				  <img src="img/msed4.png">
+				</section>
+				<section>
+				  <h3 style="color:yellow;">But 3dbrew said....</h3>
+				  <img src="img/msed4.png">
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Anatomy of a movable.sed key Y</h3>
+				  <img src="img/msed4.png">
+				  <p>This not-random number we'll call msed3 (taken from u32 msed[3])was discovered by observing that, among several msed samples, the value never rises above about 32 million. It also seems that the values are sequentially aligned the SOC manufacturing date of the device, maybe msed3 is a serial of sorts?</p>
+				  <p class="fragment">I searched all over the 3ds nand and various memory regions to find how or where the 3ds possibly uses msed3, to no avail (if you figure this out, dear reader, <i>please</i> tell me or 3dbrew.org)</p>
+				  <p class="fragment">But that's okay, because this unknown number already holds a dark, very useful secret:</p>
+				  
+				</section>
+				<section style="color:yellow;">
+					Msed3 appears to be mathematically related to the LFCS!
+				</section>
+				<section>
+					Audience: "What?!"
+				</section>
+				<section style="color:yellow;">
+					A self-leaking key, that's what! ^_^
+				</section>
+				<section>
+				  <h3 style="color:yellow;">It's true,<br>all ⅕ of it!</h3>
+				  <img src="img/msed5.png">
+				  <ul>
+					<li class="fragment">After making a spreadsheet of several LFCS/msed3 pairs, I noticed there was some sort of ratio going on</li>
+					<li class="fragment">msed3 = ⅕(LFCS) turned out to be that ratio</li>
+					<li class="fragment">... almost</li>
+					<li class="fragment">But it is actually very close: never more than ±4000 off</li>
+					<li class="fragment">That's accurate to within one-millionth of the random u32 we started with!</li>
+					<li class="fragment">This leaves us with about 2 <sup>42</sup> combinations to bf now - getting there!</li>
+				  </ul>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Fine-Tuning</h3>
+				  <ul>
+					<li>±4000 is great but we want to do better</li>
+					<li>On my very average PC, it would take about 20 days to CPU bf 2 <sup>42</sup> (~15 minutes for every u32 block x2cores)</li>
+					<li>However, writing some code that plots the expected msed3 error using data from many movable.sed nodes, reduces that number down to about ±200</li>
+					<li>The more nodes we have the better we can predict the error and speed up brute-forcing. "help wanted" from people with cfw 3ds's to help supply those nodes - a tool to dump this info will be provided</li>
+					<li>Implementing GPU bf would be another game changer - I have little experience with GPU coding so "help wanted" for this too</li>
+				  </ul>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">Gimmie bin!</h3>
+				  <ul>
+					<li>lol, patience - should be very <i>soon</i></li>
+					<li>Even then, it would be in a very, very beta state</li>
+					<li>Really would like to have a GPU BFer done before release, but I can't wait too long now - cat's outta the bag</li>
+					<li>When the time comes you will still need: userland entrypoint*, PC (faster the better), and dsiware game</li>
+					<li><a href="https://github.com/zoogie/TADpole">TADpole</a> for importing modified dsiware exports on PC - check repo for instructions</li>
+					<font size="2"><i>* maybe. who knows if friend code swapping leaves the LFCS in the other person's 3ds or not (wink, wink) network packets? hmmm ... dunno :)</i></font>
+				  </ul>
+				  
+				</section>
+				<section style="font-size:16px;">
+				<h3 style="color:yellow">Dev Notes</h3>
+				<h5 style="color:yellow">(most of you can skip this)</h5>
+				  <ul>
+					<li>movable.seds that <u>originate</u> from a new3ds have bitflags set at:<br><code>00 00 00 00 02 00 00 00 00 00 00 00 00 00 00 80</code></li>
+					<li>The msed3 new3ds bitflag (80)is not factored into the msed3/LFCS relationship. Same with the one directly after the LFCS.</li>
+					<li>For keyY verification during BF, you can use sdmc:/Nintendo 3DS/ID0(32 digit hex)</li>
+					<li>This value is the first ½ of the actual sha256 of the KeyY. See <a href="https://3dbrew.org/wiki/Nand/private/movable.sed">here</a>, last paragraph.</li>
+					<li>You can dump LFCS with udsGenerateNodeInfo or GetLocalFriendCodeSeed (and certainly others)</li>
+					<li>udsGenerateNodeInfo is chosen in my POC because it only uses default *hax services</li>
+					<li>udsGenerateNodeInfo also returns a LFCS that needs its high u16 nulled out, msed LFCS doesn't use that at all</li>
+					<li>msed3 = ⅕(LFCS) <i>and</i> = ½(deviceID) - it has a similar, but different error margin compared to the msed3/LFCS relationship</li>
+					<li>When a 3ds is system transferred, the msed2 of the <u>source</u> system is +2'd.</li>
+					<li>When a 3ds is system transferred, the whole msed of the target system becomes that of the source, except for a mystery u32 at 0x120 and the AES-MAC at 0x130. This u32 appears to reflect the +1/+2 "counter" behavior of the msed2. After the first format of the target system after systransfer, the msed will "revert" to its old msed, albeit with the msed2 counter updated.</li>
+					<li>When a 3ds is system formatted, the msed2 is +1'd. This leads in nicely to the next little bit...</li>
+					<br>
+					<li>There's a very dirty trick to speeding up BFing that I'll uncreatively call "Hash-Clustering". I'm loathe to even mention it because it requires a bunch of extra work for the user (and developer).</li>
+					<li>Here it goes: as mentioned, system formats increment the msed2 +1 each format. A new sha256 ID0 is generated as well, of course. If a few of these hashes are gathered via multiple sysformats, one could iterate the BF loop in multiples of <# of hashes> and be guaranteed not to "miss" the hash/keyy match since they are all clustered together. The result is speeding up the process since a hash/keyy comparison is much less expensive than generating a new sha digest for each keyy candidate. Again, forget I even mentioned this - it's clever but not practical.</li>
+				  </ul>
+				</section>
+				 <section>
+				  <h3 style="color:yellow;">Thanks</h3>
+				  <ul>
+					<li>Yellows8 - (documentation) <a href="https://www.3dbrew.org/wiki/DSiWare_Exports">dsiware exports</a>, <a href="https://3dbrew.org/wiki/Nand/private/movable.sed">movable.sed</a>, <a href="https://www.3dbrew.org/wiki/3DS_System_Flaws">3ds flaws</a>, and countless other pages</li>
+					<li>Yellows8 - (code) <a href="https://github.com/yellows8/ctr-dsiwaretool">ctr-dsiwaretool</a></li>
+					<li>d0k3 - adding dsiware export dump support to godmode9. This inspired me to write TADpole, and it was during its development that I noticed the msed vuln</li>
+					<li><a href="https://sciresm.github.io/33-and-a-half-c3/">B9S Team</a> - DSiWare execution wouldn't be that useful if we couldn't sign firms
+					<li>Quantumcat - for being a helpful tester cat - with glasses!</li>
+					<li>Nintendo - for making a wonderful platform in the 3ds; and for its security, which is wonderful in its own way :3
+					<li>Many others I'm sure - just let me know if I left you out</li>
+				  </ul>
+				</section>
+				<section>
+				  <h3 style="color:yellow;">The End</h3>
+				  <img src="img/sunset.jpg">
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+			history: true,
+			transition: 'fade',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
