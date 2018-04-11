@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="/editMii/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/favicon.png">
+	<title>editMii - About</title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+</head>
+<body>
+    <main class="container">
+    	<h1 class="page-header">
+    		About
+    		<a href="."><button class="pull-right btn btn-primary"><i class="fa fa-arrow-left"></i></button></a>
+    	</h1>
+    	<h3><i class="fa fa-fw fa-certificate"></i> Version: 0.2 (2018-04-11 07:43 UTC+2)</h3>
+
+    	<h3><i class="fa fa-fw fa-globe"></i> Browser compatibility</h3>
+    	<i class="fa fa-fw fa-chrome"></i> 49.0<br />
+    	<i class="fa fa-fw fa-firefox"></i> Untested. Report would be appreciated.<br />
+    	<i class="fa fa-fw fa-edge"></i> Untested. Report would be appreciated.<br />
+    	<i class="fa fa-fw fa-internet-explorer"></i> Untested. Report would be appreciated.<br />
+    	<i class="fa fa-fw fa-safari"></i> Untested. Report would be appreciated.
+
+    	<h3><i class="fa fa-fw fa-thumbs-o-up"></i> Credits</h3>
+    	<i class="fa fa-fw fa-file-code-o"></i>Editor development: <a href="mailto:webmaster@goombi.fr" target="_blank">Goombi</a>.<br />
+		Mii QR decryption: zoogie<br/>
+    	<i class="fa fa-fw fa-cogs"></i>CRC16 fix code: <a href="https://marcan.st/" target="_blank">marcan</a>.<br />
+    	<i class="fa fa-fw fa-qrcode"></i>QR Code decoder: <a href="http://lazarsoft.info/" target="_blank">Lazar</a>,
+    		adapted from the <a href="https://github.com/zxing/zxing" target="_blank">ZXing</a> project. Google charts API for
+            the QR Code encoder.<br />
+    	<i class="fa fa-fw fa-flask"></i>Research: Goombi and all the contributors
+    		to <a href="https://3dbrew.org/wiki/Mii_Maker" target="_blank">3dbrew.org</a>
+    		and <a href="http://wiibrew.org/wiki/Mii_Data" target="_blank">wiibrew.org</a><br />
+    	<i class="fa fa-fw fa-bug"></i>Testers: Looking for some :)<br />
+    	<i class="fa fa-fw fa-child"></i>Other thanks: <a href="https://gbatemp.net/threads/release-ntr-cfw-3-2-with-experimental-real-time-save-feature.385142/" target="_blank">NTR</a> for being an incredibly useful tool !<br />
+
+    	<h3><i class="fa fa-fw fa-check-square-o"></i> TODO List</h3>
+    	<ul>
+    		<li>Get that shit parsing a Mii.</li>
+    		<li>Get that shit writing a Mii.</li>
+            <li>Don't depend on Google charts API to make the QR code to be usable offline.</li>
+    	</ul>
+
+    	<h3><i class="fa fa-fw fa-list"></i> Changelog</h3>
+		<h4>v0.2 (2016-03-30 21:14 UTC+2)</h4>
+    	<ul>
+            <li>Mii QR decryption to file</li>
+    	</ul>
+    	<h4>v0.1 (2018-04-11 07:43 UTC+2)</h4>
+    	<ul>
+            <li>This version is an pre-before-alpha version! Only releasing for QR <-> .bin</li>
+            <li>Most libraries selected for QR and crypto stuff.</li>
+            <li>Can read and write encrypted Mii (QR and binary).</li>
+    	</ul>
+    </main>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
