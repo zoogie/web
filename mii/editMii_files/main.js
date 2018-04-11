@@ -23,7 +23,9 @@ $(document).ready(function() {
 	}, {reader: "readAsDataURL"});
 	// Exports
 	$("#expDEC").on("click", function() {
-		mii.updateCRC();
+		//mii.updateCRC();
+		
+		mii = new Mii(new Uint8Array(tmp));
 		Fman.downloadArray(mii.raw, "input.mii");
 	});
 	$("#expENC").on("click", function() {

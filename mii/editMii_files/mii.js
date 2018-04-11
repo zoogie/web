@@ -1,3 +1,5 @@
+
+
 const MII_MALE = false;
 const MII_FEMALE = true;
 const MII_RED = 0;
@@ -18,8 +20,26 @@ var mii;
 function Mii(data) {
 	// Encrypted
 	if (data.length == 0x70) {
-		// TODO: AES-CCM implementation + ask for 0x31 key to decrypt.
-		console.warn("NIY");
+		
+		var key = new Uint8Array([0x59,0xFC,0x81,0x7E,0x64,0x46,0xEA,0x61,0x90,0x34,0x7B,0x20,0xE9,0xBD,0xCE,0x52])
+		
+		var iv = new Uint8Array(12);// iv == nonce
+		for(var i=0;i<12;i++){
+			iv[i]=data[i];
+			if(i>7)iv[i]=0;  //need 4 byte pad
+		}
+		
+		var sdata=new Uint8Array(data.slice(0x8,0x60)); //this is the actual ciphertext, the first 8 bytes of data are the nonce
+		
+		data.set(sdata,0); //move ciphertext to beginning of buffer
+
+		var plain = asmCrypto.AES_CCM.decrypt(data, key, iv);  //tag processing was removed from asmcrypto, couldn't get it to work
+		var secondhalf=new Uint8Array(plain.slice(0xC,0x58));  //with it was commented out
+		plain.set(iv,0xC)           //iv/nonce paste-inserted at offset 0xC
+		plain.set(secondhalf,0x14)  //second half of plaintext follows iv/nonce
+
+		data=plain;
+		//alert(data.length)
 	}
 	// Decrypted without CRC
 	if (data.length == 0x5c) {
@@ -34,7 +54,7 @@ function Mii(data) {
 	this.data = {
 		id: {
 			isSpecial: false,
-			creationDate: "2010-01-01 00:00:00"
+			creationDate: "2010-01-01 00:00:00" 
 		},
 		sysID: {
 			mac: [0x00, 0x00, 0x00, 0x00]
@@ -122,7 +142,7 @@ function Mii(data) {
 			crc: 0x0000
 		}
 	};
-	this.raw = Uint8Array.from(data);
+	this.raw = Uint8Array.from(plain);
 };
 
 /**
