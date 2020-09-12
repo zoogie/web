@@ -64,8 +64,8 @@ function patch_payload(){   //from useragent, get region and system model for th
 	else if(system==2) patch_value |= 0x32;   //ascii 2 for new3ds
 	
 	if(region=="US") patch_value |= (0x5355 << 16);      //US ascii backwards (little endian)
-	else if(region="EU") patch_value |= (0x5545 << 16);  //EU  ''
-	else if(region="JP") patch_value |= (0x504A << 16);  //JP  ''
+	else if(region=="EU") patch_value |= (0x5545 << 16);  //EU  ''
+	else if(region=="JP") patch_value |= (0x504A << 16);  //JP  ''
 	
 	
 	for(var i=0;i<payload.length;i++){
