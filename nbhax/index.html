@@ -31,7 +31,7 @@
 			var region="*";
 			var slash=0;
 			var dot=0;
-			var supported_regions=["US","EU","JP"];
+			var supported_regions=["US","EU","JP","KR"];
 			var supported_versions=["1.7636","1.10.10166"];
 			var out = "";
 
@@ -43,6 +43,7 @@
 				version=uagent.substring(slash+1,dot);
 				region=uagent.substring(dot+1,dot+3);
 				out = "NEW 3DS - "+region+" v"+version+"<br>";
+				if(region=="KR") system=25;
 			}
 			else if(uagent.indexOf("Nintendo 3DS") != -1)
 			{
@@ -52,6 +53,7 @@
 				version=uagent.substring(slash+1,dot);
 				region=uagent.substring(dot+1,dot+3);
 				out = "OLD 3DS - "+region+" v"+version+"<br>";
+				if(region=="KR") system=15;
 			}
 			else {
 				system = 0;
@@ -84,6 +86,12 @@
 			}
 			else if (system == 2) {
 				window.location.href = "nbhax.html";
+			}
+			else if (system == 15) {
+				window.location.href = "kor_obhax.html";
+			}
+			else if (system == 25) {
+				window.location.href = "kor_nbhax.html";
 			}
 			else {
 				document.getElementById("output").innerHTML = "WHAT IS WRONG WITH THE ELF<br><br><br><br>";
