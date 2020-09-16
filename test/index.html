@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+	<style>
+		#output {
+			text-align: center;
+			font-size: 40px;
+		}
+		#button {
+			margin: 0 auto;
+			height: 200px;
+			width: 600px;
+			text-align: center;
+			font-size: 50px;
+			vertical-align: middle;
+			background-color: #a0ffa0;
+			display: table;
+			border-radius: 25px;
+			border: 1px black;
+		}
+		body {
+			background-color: #a0a0ff;
+			height: 400px;
+		}
+	</style>
+	<script>
+		var system = 0;
+		var mobile = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A403 Safari/8536.25";
+		function setup() {
+			var uagent = navigator.userAgent;
+			var version="*";
+			var region="*";
+			var slash=0;
+			var dot=0;
+			var supported_regions=["US","EU","JP","KR"];
+			var supported_versions=["1.7636","1.10.10166"];
+			var out = "";
+
+			if (uagent.indexOf("New Nintendo 3DS") != -1)
+			{
+				system = 2;
+				slash=uagent.lastIndexOf("/");
+				dot=uagent.lastIndexOf(".");
+				version=uagent.substring(slash+1,dot);
+				region=uagent.substring(dot+1,dot+3);
+				out = "NEW 3DS - "+region+" v"+version+"<br>";
+				if(region=="KR") system=25;
+			}
+			else if(uagent.indexOf("Nintendo 3DS") != -1)
+			{
+				system = 1;
+				slash=uagent.lastIndexOf("/");
+				dot=uagent.lastIndexOf(".");
+				version=uagent.substring(slash+1,dot);
+				region=uagent.substring(dot+1,dot+3);
+				out = "OLD 3DS - "+region+" v"+version+"<br>";
+				if(region=="KR") system=15;
+			}
+			else {
+				system = 0;
+				out = "Unsupported device<br>";
+				if (uagent == mobile) {
+					out = 'Please uncheck "Request Mobile Sites" in the Menu tab (bottom right corner)<br>';
+				}
+			}
+
+			if(system){
+				if(supported_regions.indexOf(region) == -1) {
+					out += "Unsupported region<br>";
+					system=0;
+				}
+				if(supported_versions.indexOf(version) == -1) {
+					out += "Unsupported version<br>";
+					system=0;
+				}
+				if(region=="" || version=="") {
+					out += "Wtf?";
+					system=0;				
+				}
+			}
+			document.getElementById("output").innerHTML = out+"<br><br><br>";
+			if(system==0) document.getElementById("button").innerHTML = "I AM ERROR";
+		}
+		function go() {
+			if (system == 1) {
+				window.location.href = "obhax.html";
+			}
+			else if (system == 2) {
+				window.location.href = "nbhax.html";
+			}
+			else if (system == 15) {
+				window.location.href = "kor_obhax.html";
+			}
+			else if (system == 25) {
+				window.location.href = "kor_nbhax.html";
+			}
+			else {
+				document.getElementById("output").innerHTML = "WHAT IS WRONG WITH THE ELF<br><br><br><br>";
+			}
+		}
+	</script>
+</head>
+<body onload="setup()">
+	<div id="output">THE BURNT TOWER WAS BURNT OFF BY FIRE
+	</div>
+	<button id="button" onclick="go()">PROCEED TO HAXX
+	</button>
+</body>
+</html>
