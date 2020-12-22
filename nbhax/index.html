@@ -32,7 +32,7 @@
 			var slash=0;
 			var dot=0;
 			var supported_regions=["US","EU","JP","KR","CN","TW"];
-			var supported_versions=["1.7636","1.10.10166"];
+			var supported_versions=["1.7630","1.7636","1.9.10160","1.10.10166"];
 			var out = "";
 
 			if (uagent.indexOf("New Nintendo 3DS") != -1)
@@ -43,7 +43,14 @@
 				version=uagent.substring(slash+1,dot);
 				region=uagent.substring(dot+1,dot+3);
 				out = "NEW 3DS - "+region+" v"+version+"<br>";
-				if(region=="KR") system=25;
+				if(version=="1.9.10160"){
+					system=4;
+					if(region=="KR") system=999;
+				}
+				else if(version=="1.10.10166"){
+				
+					if(region=="KR") system=25;
+				}
 			}
 			else if(uagent.indexOf("Nintendo 3DS") != -1)
 			{
@@ -53,9 +60,17 @@
 				version=uagent.substring(slash+1,dot);
 				region=uagent.substring(dot+1,dot+3);
 				out = "OLD 3DS - "+region+" v"+version+"<br>";
-				if(region=="KR") system=15;
-				else if(region=="CN") system=14;
-				else if(region=="TW") system=16;
+				if(version=="1.7630"){
+					system = 3;
+					if(region=="KR") system=999;
+					else if(region=="CN") system=999;
+					else if(region=="TW") system=999;
+				}
+				else if(version=="1.7636"){
+					if(region=="KR") system=15;
+					else if(region=="CN") system=14;
+					else if(region=="TW") system=16;
+				}
 			}
 			else {
 				system = 0;
@@ -66,7 +81,7 @@
 			}
 
 			if(system){
-				if(supported_regions.indexOf(region) == -1) {
+				if(supported_regions.indexOf(region) == -1 || system==999) {
 					out += "Unsupported region<br>";
 					system=0;
 				}
@@ -88,6 +103,12 @@
 			}
 			else if (system == 2) {
 				window.location.href = "nbhax.html";
+			}
+			else if (system == 3) {
+				window.location.href = "114_obhax.html";
+			}
+			else if (system == 4) {
+				window.location.href = "114_nbhax.html";
 			}
 			else if (system == 15) {
 				window.location.href = "kor_obhax.html";
