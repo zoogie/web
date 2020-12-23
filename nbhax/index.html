@@ -32,7 +32,7 @@
 			var slash=0;
 			var dot=0;
 			var supported_regions=["US","EU","JP","KR","CN","TW"];
-			var supported_versions=["1.7630","1.7636","1.9.10160","1.10.10166"];
+			var supported_versions=["1.7630","1.7636","1.9.10160","1.10.10166","1.11.10172"];
 			var out = "";
 
 			if (uagent.indexOf("New Nintendo 3DS") != -1)
@@ -50,6 +50,10 @@
 				else if(version=="1.10.10166"){
 				
 					if(region=="KR") system=25;
+				}
+				else if(version=="1.11.10172"){
+					system=6;
+					//if(region=="KR") system=999;
 				}
 			}
 			else if(uagent.indexOf("Nintendo 3DS") != -1)
@@ -109,6 +113,9 @@
 			}
 			else if (system == 4) {
 				window.location.href = "114_nbhax.html";
+			}
+			else if (system == 6) {
+				window.location.href = "1114_nuk.html";
 			}
 			else if (system == 15) {
 				window.location.href = "kor_obhax.html";
