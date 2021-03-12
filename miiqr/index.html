@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/favicon.png">
+    <title>editMii</title>
+    <link rel="stylesheet" type="text/css" href="maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+</head>
+<body>
+	<main class="container">
+		<h1 class="page-header">
+			editMii 
+			<a href="about.html"><button class="pull-right btn btn-primary"><i class="fa fa-info-circle"></i></button></a>
+		</h1>
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-cloud-upload"></i> Import from... <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a id="impDEC" href="#"><i class="fa fa-user"></i> decrypted (.mii)</a></li>
+				<li><a id="impENC" href="#"><i class="fa fa-file-o"></i> encrypted (.bin)</a></li>
+				<li><a id="impQRC" href="#"><i class="fa fa-qrcode"></i> QR code</a></li>
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fa fa-cloud-download"></i> Export to... <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a id="expDEC" href="#"><i class="fa fa-user"></i> decrypted (.mii)</a></li>
+				<li><a id="expENC" href="#"><i class="fa fa-file-o"></i> encrypted (.bin)</a></li>
+				<li><a id="expQRC" href="#"><i class="fa fa-qrcode"></i> QR code</a></li>
+			</ul>
+		</div>
+		<br />
+		<img id="qroutput"/>
+		<br />
+		<div class="alert alert-warning">This is the very beginning of this project, most functions won't work.<br />
+		For now, you can only open encrypted Mii (from QR code or binary file) and download encrypted Mii (in QR code or binary).</div>
+	</main>
+
+	<script src="ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="assets/js/jsqrcode/grid.js"></script>
+	<script src="assets/js/jsqrcode/version.js"></script>
+	<script src="assets/js/jsqrcode/detector.js"></script>
+	<script src="assets/js/jsqrcode/formatinf.js"></script>
+	<script src="assets/js/jsqrcode/errorlevel.js"></script>
+	<script src="assets/js/jsqrcode/bitmat.js"></script>
+	<script src="assets/js/jsqrcode/datablock.js"></script>
+	<script src="assets/js/jsqrcode/bmparser.js"></script>
+	<script src="assets/js/jsqrcode/datamask.js"></script>
+	<script src="assets/js/jsqrcode/rsdecoder.js"></script>
+	<script src="assets/js/jsqrcode/gf256poly.js"></script>
+	<script src="assets/js/jsqrcode/gf256.js"></script>
+	<script src="assets/js/jsqrcode/decoder.js"></script>
+	<script src="assets/js/jsqrcode/qrcode.js"></script>
+	<script src="assets/js/jsqrcode/findpat.js"></script>
+	<script src="assets/js/jsqrcode/alignpat.js"></script>
+	<script src="assets/js/jsqrcode/databr.js"></script>
+	<script src="assets/js/sjcl.js"></script>
+	<script src="assets/js/fman.js"></script>
+	<script src="assets/js/mii.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>
