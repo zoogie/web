@@ -77,7 +77,7 @@
 				}
 				else if(version=="1.7639"){
 					system = 17;
-					if(region=="KR") system=999;
+					if(region=="KR") system=18;
 					else if(region=="CN") system=999;
 					else if(region=="TW") system=999;
 				}
@@ -140,6 +140,9 @@
 			}
 			else if (system == 17) {
 				window.location.href = "1114_ou.html";
+			}
+			else if (system == 18) {
+				window.location.href = "1114_ok.html";
 			}
 			else {
 				document.getElementById("output").innerHTML = "WHAT IS WRONG WITH THE ELF<br><br><br><br>";
