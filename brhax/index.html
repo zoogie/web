@@ -33,7 +33,7 @@
 			var slash=0;
 			var dot=0;
 			var supported_regions=["US","EU","JP","KR","CN","TW"];
-			var supported_versions=["1.7630","1.7636","1.7639","1.9.10160","1.10.10166","1.11.10172"];
+			var supported_versions=["1.7630","1.7636","1.7639","1.7642","1.9.10160","1.10.10166","1.11.10172","1.12.10178"];
 			var out = "";
 
 			if (uagent.indexOf("New Nintendo 3DS") != -1)
@@ -52,7 +52,7 @@
 				
 					if(region=="KR") system=25;
 				}
-				else if(version=="1.11.10172"){
+				else if(version=="1.11.10172" || version=="1.12.10178"){
 					system=6;
 					//if(region=="KR") system=999;
 				}
@@ -76,7 +76,7 @@
 					else if(region=="CN") system=14;
 					else if(region=="TW") system=16;
 				}
-				else if(version=="1.7639"){
+				else if(version=="1.7639" || version=="1.7642"){
 					system = 17;
 					if(region=="KR") system=18;
 					else if(region=="CN") system=19;
