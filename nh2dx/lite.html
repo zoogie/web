@@ -1,0 +1,95 @@
+ <!DOCTYPE html>
+ <header>
+	<style>
+		html {
+			background-color: #A0A0ff;
+			color: white;
+		}
+
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		th, td {
+			border: 1px solid white;
+			font-size: 80%;
+			font-weight: bold;
+		}		
+		
+
+		table {
+			border: 1px solid white;
+			margin-top: 50px;
+			margin-right: auto;
+			margin-left: auto;
+			width: 25%;
+			height: 25%;
+			margin-bottom: 50px;
+			font-size: 40px;
+			font-weight: bold;
+		}
+		
+		#desc, #ins {
+			text-align: center;
+		}
+		input {
+			display: block;
+			width: 100%;
+			height: 100%;
+			margin-left: auto;
+			margin-right: auto;	
+			font-size: 30px;
+		}
+	</style>
+	<script>
+		function changeQR(q){
+			var qrs=[
+			"POST5_U_29697_usa_9221.png",
+			"POST5_E_29696_9221.png",
+			"POST5_J_31745_9221.png",
+			"N3DS_U_29697_usa_9221.png",
+			"N3DS_E_29696_9221.png",
+			"N3DS_J_31745_9221.png"
+			];
+			var desc=["OLD 3DS | USA","OLD 3DS | EUROPE","OLD 3DS | JAPAN","NEW 3DS | USA","NEW 3DS | EUROPE","NEW 3DS | JAPAN"];
+			
+			document.getElementById("table").style.display='none';
+			document.getElementById("q").src="qr_lite/" + qrs[q];
+			document.getElementById("desc").innerHTML=desc[q] + "<br><a href='lite.html'>Choose another QR</a>";
+			
+		};
+
+	</script>
+</header>
+<html>
+	<body>
+	<center><h1>Ninjhax2 DX Lite</h1>
+	<h3>One QR Ninjhax2 for latest firmwares<br>
+	(11.7+ for USA/JPN, 11.10+ for EUR)</h3>
+	<h4><a href="index.html">Return to standard edition?<br>(savegame hax install)</a></h4>
+	</center>
+
+	 <table id="table">
+	  <tr>
+	    <th>OLD 3DS</th>
+	    <th>NEW 3DS</th>
+	  </tr>
+	  <tr>
+	    <td ><input type="button" onclick="changeQR(0)" value="USA"></td>
+	    <td ><input type="button" onclick="changeQR(3)" value="USA"></td>
+	  </tr>
+	  <tr>
+	    <td ><input type="button" onclick="changeQR(1)" value="EUR"></td>
+	    <td ><input type="button" onclick="changeQR(4)" value="EUR"></td>
+	  </tr>
+	  <tr>
+	    <td ><input type="button" onclick="changeQR(2)" value="JPN"></td>
+	    <td ><input type="button" onclick="changeQR(5)" value="JPN"></td>
+	  </tr>
+	</table> 
+	<img id="q" src="" label=""></img>
+	<div id="desc"></div>
+	<div id="ins"><br><br><a href="https://github.com/zoogie/ninjhax2-dx#directions">Directions<br>and other info<a/></div>
+	</body>
+</html> 
