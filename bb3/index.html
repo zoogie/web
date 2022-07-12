@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html>
+    
+<!-- Mirrored from 3ds.nhnarwhal.com/3dstools/bannerbomb3.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jul 2022 03:54:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<title>BannerBomb3 Generic Loader</title>
+        
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../../stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="../../stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-w+8Gqjk9Cuo6XH9HKHG5t5I1VR4YBNdPt/29vwgfZR485eoEJZ8rJRbm3TR32P6k" crossorigin="anonymous">
+<link rel="stylesheet" href="bootstrap.css">
+<script src="jquery-3.4.1.min.js"></script>
+
+        <script type="text/javascript" src="iefix.js"></script>
+<!--        <script type="text/javascript" src="aes.js"></script>
+        <script type="text/javascript" src="cmac.js"></script>
+        <script type="text/javascript" src="sha256.js"></script>-->
+        <script type="text/javascript" src="common.js"></script>
+        <script type="text/javascript" src="bignum.js"></script>
+<!--        <script type="text/javascript" src="keyAlg.js"></script>
+        <script type="text/javascript" src="bn.js"></script>
+        <script type="text/javascript" src="ec.js"></script>
+        <script type="text/javascript" src="jszip.js"></script>-->
+        <script type="text/javascript" src="bannerbomb3.js"></script>
+
+
+        <script>
+        function fileobject(displayname,filter,fileobjectid,contentobjectid,noteobjectid,defaultnote,checkfunc,postfunc) {
+            this.name=displayname;
+            this.file=fileobjectid;
+            this.content=contentobjectid;
+            this.note=noteobjectid;
+            this.default=defaultnote;
+            this.check=checkfunc;
+            this.post=postfunc || null;
+            this.loaded=false;
+            this.filter=filter || "*";
+        }
+
+        var LoadedCheck;
+        var files = [];
+        const successicon="✅ Successfully loaded.";
+        const failedicon="❌ Failed.";
+        const loadingicon="Loading please wait...";
+        const HashVal="TUhneFJrWTVSVGxCUVVNMVJrVXdOREE0TURJME5Ua3hSRU0xUkRVeU56WTRRUT09TUhoak5qWmxNak14TWpobU1qZzVNVE16WmpBMFkyUmlPRGMzWVRNM05EbG1NZz09TUhnMlJrSkNNREZHT0RjeVEwRkdPVU13TVRnek5FVkZRekEwTURZMVJVVTFNdz09TUhoQ05USTVNakl4UTBSRVFqVkVRalZCTVVKR01qWkZSa1l5TURReFJUZzNOUT09";
+        //B529221CDDB5DB5A1BF26EFF2041E875
+        var hashingTools;
+        var dsiWareHeader=new Array(0x40);
+        function addStatus(text,colorclass) {
+            var colorclass = colorclass || "text-muted";
+            if (colorclass=="text-muted") {
+                return;
+            }
+            //document.getElementById('statusnote').innerHTML
+            setTimeout(function (text,colorclass) {
+                var note = document.createElement("small");
+                note.className = "form-text "+ colorclass;
+                var node = document.createTextNode(text);
+                note.appendChild(node);
+                var element = document.getElementById("statusnotediv");
+                element.appendChild(note);
+                element.scrollIntoView(false);
+
+            },0,text,colorclass);
+        }
+
+        /*************************/
+
+        function AllLoaded() {
+            var loaded=true;
+            for (var i=0;i<files.length;i++) {
+                if (files[i].loaded==false)
+                    loaded=false;
+            }
+            if (loaded==true) {
+                $('#build').prop('disabled',false);
+                $('#build').removeClass('btn-secondary');
+                $('#build').addClass('btn-success');
+            }else{
+                LoadedCheck=setTimeout(AllLoaded,200);
+            }
+        }
+
+        function loadFile(fileElementId,icon,contents,filenum) {
+            icon = document.getElementById(icon);
+            contents=document.getElementById(contents);
+            var fileElement=document.getElementById(fileElementId);
+            icon.innerHTML = "";
+            contents.value="";
+            files[filenum].loaded=false;
+            file=fileElement.files;
+            $('#build').prop('disabled', true);
+            $('#build').removeClass('btn-success');
+            $('#build').addClass('btn-secondary');
+            if (typeof(bb3Worker) != "undefined") {
+                bb3Worker.terminate();
+                bb3Worker = undefined;
+            }
+            clearTimeout(LoadedCheck);
+            LoadedCheck=setTimeout(AllLoaded,200);
+
+            if (file.length < 1) {
+                return;
+                
+            }
+            file=file[0];
+            if (!files[filenum].check(file)) {
+                icon.innerHTML=failedicon;
+                fileElement.value="";
+                return;
+            }else{
+                icon.innerHTML=loadingicon;
+            }
+            addStatus("Loading "+files[filenum].name,"text-info");
+            var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent){
+                    if (!fileLoadedEvent) {
+                        var data = fileReader.content;
+                    }else {
+                        var data = fileLoadedEvent.target.result;
+                    }
+                    contents.value = toHexString(stringToBytes(data));
+                    files[filenum].loaded=true;
+                    icon.innerHTML=successicon;
+                    addStatus(files[filenum].name+" successfully loaded","text-success");
+                    setTimeout(files[filenum].post);
+                    
+        //            postLoad[filenum]();
+
+                    //console.log(textFromFileLoaded);
+                };
+                fileReader.readAsBinaryString(file);
+        }
+
+
+
+
+
+        </script>
+    </head>
+    <body class="">
+
+		<div id="page-content" class='row align-items-center justify-content-center'>
+            
+			<script>
+				var isSupported = (isSupported==undefined || isSupported);
+				if (isSupported == false) {
+					var notSupported=document.createElement('div');
+					$(notSupported).addClass('alert');
+					$(notSupported).addClass('alert-warning');
+					$(notSupported).addClass('alert-dismissible');
+					$(notSupported).addClass('ml-3');
+					var dismissbutton=document.createElement('button');
+					dismissbutton.type="button";
+					$(dismissbutton).addClass("close");
+					$(dismissbutton).attr('data-dismiss','alert');
+					$(dismissbutton).html('&times;');
+					if (typeof(Worker) !== "undefined") {
+						$(notSupported).html("Your browser is not supported. The process may take significantly longer. Please use Google Chrome, Mozilla Firefox, or Microsoft Edge.");
+					} else {
+						$(notSupported).html("This site will not work on this browser. Please use Google Chrome, Mozilla Firefox, or Microsoft Edge.");
+						$(notSupported).removeClass('alert-warning');
+						$(notSupported).addClass('alert-danger');
+						// Sorry! No Web Worker support..
+					}
+					$(notSupported).append(dismissbutton);
+					$('#page-content').append(notSupported);
+				}
+			</script>
+		</div>
+            <div class='row align-items-center justify-content-center'>
+                <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 col">
+                    <div class='card'>
+                        <div class="card-header bg-primary h4">
+                            BannerBomb3 Generic Loader<br>
+                        </div>
+                        <div class="card-body">
+			    <ul class="list-group">
+			    <h6>(temp copy from <a href="https://3ds.nhnarwhal.com/3dstools/bannerbomb3.php">HERE</a> with changes)</h6>
+                                <li class="list-group-item" ><b>THIS IS BANNERBOMB3'S GENERIC "bb3.bin" LOADER<br>
+								SUPPORT USA/EUR/JPN/KOR, FIRM 11.5+</b></li>
+                                 <li class="list-group-item" >This site is known to have some issues with Internet Explorer. If you are using Internet Explorer, please move to a modern browser like <a target="_blank" href="https://www.google.com/chrome/">Chrome</a> or <a target="_blank" href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>.</li>
+                                <li class="list-group-item" >As you select files, they will be dynamically loaded and checked.</li>
+			    </ul>
+                            <hr class='mt-3 bg-sucess' />
+                            <div class='border-info mb-3'>
+                                <form id="settings" class="form form-dark">
+                                    <div id="entries"></div>
+                                    <div class="form-group">
+                                        <input type=button id="build" value="Build and Download" disabled=true onClick="buildDSiWare()" class="btn btn-secondary ">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card border-info mb-3">
+                                <div class="card-header">Status</div>
+                                <div class="card-body" id="statusnotediv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        
+
+        <script>
+
+        files.push(new fileobject('movable.sed','.sed','movablefile','movablecontents','movablenote','Do not choose "movable_part1.sed"',checkMovable));
+        //files.push(new fileobject('Alternate Banner','.bin','dsiwarefile','dsiwarecontents','dsiwarenote','dont worry about this',checkAltBanner));
+
+            //console.log(files);
+            for (var i=0;i<files.length;i++) {
+                var form=document.getElementById('entries');
+                var groupobject=document.createElement('div');
+                $(groupobject).addClass('form-group');
+            //    groupobject.classList="form-group";
+                //Label
+                var labelobject=document.createElement("label");
+                labelobject.id=files[i].file+"label";
+                labelobject.for=files[i].file;
+                labelobject.innerHTML="Select your " + files[i].name + " :";
+                //Create file object
+                var nfileobject=document.createElement("input");
+                nfileobject.type="file";
+                nfileobject.id=files[i].file;
+                $(nfileobject).addClass('form-control');
+                $(nfileobject).prop('accept',files[i].filter);
+                nfileobject.style="min-height: 42px";
+                //note object
+                var noteobject=document.createElement("small");
+                noteobject.id=files[i].note;
+                noteobject.innerHTML=files[i].default;
+                //noteobject.classList="form-text text-muted help-block";
+                $(noteobject).addClass('form-text');
+                $(noteobject).addClass('text-muted');
+                
+                //Content
+                var contentobject=document.createElement("input");
+                contentobject.type="hidden";
+                contentobject.id=files[i].content;
+
+
+
+                groupobject.appendChild(labelobject);
+                groupobject.appendChild(nfileobject);
+                groupobject.appendChild(noteobject);
+                groupobject.appendChild(contentobject);
+
+                form.appendChild(groupobject);
+                nfileobject.addEventListener("change",loadFile.bind(null,files[i].file,files[i].note,files[i].content,i));
+            }
+
+            LoadedCheck=setTimeout(AllLoaded,200);
+        </script>
+
+        
+    <div class="container text-center">
+    <small>This site is copyrighted 2019. This site was designed for use on modern browsers but workarounds have been put in place to attempt to make it function on IE11. If you are using IE11, use a different browser.</small>
+    </div>
+
+
+        
+
+        <script src="../../cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="../../stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+    </body>
+
+<!-- Mirrored from 3ds.nhnarwhal.com/3dstools/bannerbomb3.php by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 Jul 2022 03:54:16 GMT -->
+</html>
