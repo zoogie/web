@@ -27,7 +27,7 @@ function buildDSiWare() {
     if (typeof(buildWorker) != "undefined") {
         buildWorker.terminate();
     }
-    buildWorker = new Worker("./bb3_buildWorker.js");
+    buildWorker = new Worker("bb3_buildworker.js");
     buildWorker.addEventListener('message', handleBWMessage);
     buildWorker.postMessage({cmd:"start",val:{keyy: hexToBig(document.getElementById('movablecontents').value).slice(0x110,0x120)}});
 
