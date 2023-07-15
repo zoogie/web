@@ -3,13 +3,16 @@ var tmp;
 
 $(document).ready(function() {
 	// Imports
-	Fman.makeInput("#impDEC", function(data) {
+	var impDecCb = function(data) {
 		mii = new Mii(new Uint8Array(data));
 		//alert("NIY");
-	});
-	Fman.makeInput("#impENC", function(data) {
+	};
+	var impEncCb = function(data) {
 		tmp = new Uint8Array(data);
-	});
+	};
+
+	Fman.makeInput("#impDEC", impDecCb);
+	Fman.makeInput("#impENC", impEncCb);
 	// Read QR Code
 	qrcode.callback = function(data) {
 		var uint = new Uint8Array(data.length);
@@ -27,11 +30,39 @@ $(document).ready(function() {
 		} catch(e) {
 		}
 	});
-	$(document).on("paste", function (e) {
+	$(document).on("paste", function(e) {
 		e.preventDefault();
-		Array.from(e.originalEvent.clipboardData.files).forEach(function (item) {
-			if (item && item.type.startsWith('image/')) {
+		Array.from(e.originalEvent.clipboardData.files).forEach(function(item) {
+			if (item && item.type.startsWith("image/")) {
 				qrcode.decode(URL.createObjectURL(item));
+			}
+		});
+	});
+	// Drag&drop
+	$(document).on("dragover", function(e) {
+		e.preventDefault();
+	});
+	$(document).on("drop", function(e) {
+		e.preventDefault();
+		Array.from(e.originalEvent.dataTransfer.items).forEach(function(item) {
+			if (item) {
+				if (item.type === "text/plain") {
+					item.getAsString(function(text) {
+						try {
+							qrcode.decode(new URL(text));
+						} catch(e) {
+						}
+					});
+				} else if (item.type === "application/octet-stream") {
+					var file = item.getAsFile();
+					if (file.size == 112 && file.name.endsWith(".bin")) {
+						Fman.processFile(file, impEncCb);
+					} else if (file.name.endsWith(".mii")) {
+						Fman.processFile(file, impDecCb);
+					}
+				} else if (item.type.startsWith("image/")) {
+					qrcode.decode(URL.createObjectURL(item.getAsFile()));
+				}
 			}
 		});
 	});
