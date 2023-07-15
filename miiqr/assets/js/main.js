@@ -27,7 +27,7 @@ $(document).ready(function() {
 		} catch(e) {
 		}
 	});
-	$(document).on('paste', function (e) {
+	$(document).on("paste", function (e) {
 		e.preventDefault();
 		Array.from(e.originalEvent.clipboardData.files).forEach(function (item) {
 			if (item && item.type.startsWith('image/')) {
