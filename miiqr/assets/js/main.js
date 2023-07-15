@@ -35,6 +35,45 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$(document).on("dragover", function (e) {
+		e.preventDefault();
+	});
+	$(document).on("drop", function (e) {
+		e.preventDefault();
+		Array.from(e.originalEvent.dataTransfer.items).forEach(function (item) {
+			if (item) {
+				if (item.type === "text/plain") {
+					item.getAsString(function (text) {
+						try {
+							qrcode.decode(new URL(text));
+						} catch(e) {
+						}
+					});
+				} else if (item.type === "application/octet-stream") {
+					var file = item.getAsFile();
+					if (file.size == 112 && file.name.endsWith(".bin")) {
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							tmp = new Uint8Array(e.target.result);
+						};
+						reader.readAsArrayBuffer(file);
+					} else if (file.name.endsWith(".mii")) {
+						var reader = new FileReader();
+						reader.onload = function (e) {
+							mii = new Mii(new Uint8Array(data));
+						};
+						reader.readAsArrayBuffer(file);
+					}
+				} else if (item.type.startsWith("image/")) {
+					var reader = new FileReader();
+					reader.onload = function (e) {
+						qrcode.decode(e.target.result);
+					};
+					reader.readAsDataURL(item.getAsFile());
+				}
+			}
+		});
+	});
 	// Exports
 	$("#expDEC").on("click", function() {
 		mii.updateCRC();
