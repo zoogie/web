@@ -3,13 +3,16 @@ var tmp;
 
 $(document).ready(function() {
 	// Imports
-	Fman.makeInput("#impDEC", function(data) {
+	var impDecCb = function(data) {
 		mii = new Mii(new Uint8Array(data));
 		//alert("NIY");
-	});
-	Fman.makeInput("#impENC", function(data) {
+	};
+	var impEncCb = function(data) {
 		tmp = new Uint8Array(data);
-	});
+	};
+
+	Fman.makeInput("#impDEC", impDecCb);
+	Fman.makeInput("#impENC", impEncCb);
 	// Read QR Code
 	qrcode.callback = function(data) {
 		var uint = new Uint8Array(data.length);
@@ -27,23 +30,24 @@ $(document).ready(function() {
 		} catch(e) {
 		}
 	});
-	$(document).on("paste", function (e) {
+	$(document).on("paste", function(e) {
 		e.preventDefault();
-		Array.from(e.originalEvent.clipboardData.files).forEach(function (item) {
+		Array.from(e.originalEvent.clipboardData.files).forEach(function(item) {
 			if (item && item.type.startsWith("image/")) {
 				qrcode.decode(URL.createObjectURL(item));
 			}
 		});
 	});
-	$(document).on("dragover", function (e) {
+	// Drag&drop
+	$(document).on("dragover", function(e) {
 		e.preventDefault();
 	});
-	$(document).on("drop", function (e) {
+	$(document).on("drop", function(e) {
 		e.preventDefault();
-		Array.from(e.originalEvent.dataTransfer.items).forEach(function (item) {
+		Array.from(e.originalEvent.dataTransfer.items).forEach(function(item) {
 			if (item) {
 				if (item.type === "text/plain") {
-					item.getAsString(function (text) {
+					item.getAsString(function(text) {
 						try {
 							qrcode.decode(new URL(text));
 						} catch(e) {
@@ -52,24 +56,12 @@ $(document).ready(function() {
 				} else if (item.type === "application/octet-stream") {
 					var file = item.getAsFile();
 					if (file.size == 112 && file.name.endsWith(".bin")) {
-						var reader = new FileReader();
-						reader.onload = function (e) {
-							tmp = new Uint8Array(e.target.result);
-						};
-						reader.readAsArrayBuffer(file);
+						Fman.processFile(file, impEncCb);
 					} else if (file.name.endsWith(".mii")) {
-						var reader = new FileReader();
-						reader.onload = function (e) {
-							mii = new Mii(new Uint8Array(data));
-						};
-						reader.readAsArrayBuffer(file);
+						Fman.processFile(file, impDecCb);
 					}
 				} else if (item.type.startsWith("image/")) {
-					var reader = new FileReader();
-					reader.onload = function (e) {
-						qrcode.decode(e.target.result);
-					};
-					reader.readAsDataURL(item.getAsFile());
+					qrcode.decode(URL.createObjectURL(item.getAsFile()));
 				}
 			}
 		});

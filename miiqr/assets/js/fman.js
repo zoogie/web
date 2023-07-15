@@ -21,6 +21,21 @@ Fman.downloadArray = function(data, filename) {
     }
 }
 
+Fman.processFile = function(file, callback, options) {
+	var defaults = {
+		reader: "readAsArrayBuffer"
+	};
+	var opts = $.extend({}, defaults, options);
+	var reader = new FileReader();
+	reader.onload = (function(callback){
+	    var cb = callback;
+	    return function(e){
+	        cb(e.target.result);
+	    };
+	})(callback);
+	reader[opts.reader](file);
+}
+
 Fman.makeButton = function(selector, callback, options) {
 	var defaults = {
 		text: "Upload a file",
